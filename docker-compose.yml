@@ -1,0 +1,14 @@
+services:
+  dbc-viewer:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - app_node_modules:/app/node_modules
+      - app_angular_cache:/app/.angular
+    command: npm start
+
+volumes:
+  app_node_modules:
+  app_angular_cache:

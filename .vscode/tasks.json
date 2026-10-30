@@ -1,0 +1,39 @@
+{
+  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker: start (compose)",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "--build"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "docker: build Angular (compose)",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "run", "--rm", "dbc-viewer", "npm", "run", "build"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "docker: test (compose)",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "run", "--rm", "dbc-viewer", "npm", "test", "--", "--watch=false"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

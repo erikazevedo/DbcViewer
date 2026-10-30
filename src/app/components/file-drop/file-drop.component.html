@@ -1,0 +1,24 @@
+<label class="drop-zone" for="dbc-file">
+  <i class="bi bi-file-earmark-arrow-up drop-icon" aria-hidden="true"></i>
+  <span class="fw-semibold">Drop a .dbc file here, or click to choose one</span>
+  <span class="small text-body-secondary">The file is read in your browser and never uploaded.</span>
+  <input
+    id="dbc-file"
+    class="visually-hidden"
+    type="file"
+    accept=".dbc,.txt"
+    (change)="onFileChosen($event)"
+  />
+</label>
+
+<div class="d-flex flex-column align-items-center gap-2 mt-3">
+  <button type="button" (click)="exampleRequested.emit()">
+    <i class="bi bi-lightning me-1" aria-hidden="true"></i>Load example
+  </button>
+
+  @if (error()) {
+    <div class="text-danger small" role="alert">
+      <i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>{{ error() }}
+    </div>
+  }
+</div>

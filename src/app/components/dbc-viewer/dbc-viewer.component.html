@@ -1,0 +1,57 @@
+@if (dbc.database(); as database) {
+  <div class="toolbar">
+    <div class="summary">
+      <i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i>
+      <strong>{{ dbc.fileName() }}</strong>
+      <span class="text-body-secondary">
+        &middot; {{ database.messages.length }} messages &middot; {{ database.signalCount }} signals
+        &middot; {{ database.nodes.length }} nodes
+      </span>
+    </div>
+    <button type="button" class="ms-auto text-nowrap" (click)="closeFile()">
+      <i class="bi bi-folder2-open me-1" aria-hidden="true"></i>Open another file
+    </button>
+  </div>
+
+  <div class="body">
+    <aside class="sidebar" aria-label="Message browser">
+      <div class="filters">
+        <input
+          type="search"
+          class="form-control form-control-sm"
+          placeholder="Search messages and signals…"
+          aria-label="Search messages and signals"
+          [formControl]="filterControl"
+        />
+        <select class="form-select form-select-sm" aria-label="Filter by node" [formControl]="nodeControl">
+          <option value="">All nodes</option>
+          @for (node of database.nodes; track node.name) {
+            <option [value]="node.name">
+              {{ node.name }}{{ node.comment ? ' – ' + node.comment : '' }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <message-list
+        [messages]="filteredMessages()"
+        [selectedId]="selectedMessage()?.rawId ?? null"
+        (selected)="selectedId.set($event)"
+      ></message-list>
+    </aside>
+
+    <section class="detail" aria-label="Message details">
+      @if (selectedMessage(); as message) {
+        <message-detail [message]="message"></message-detail>
+      } @else {
+        <p class="text-body-secondary">Select a message to see its details.</p>
+      }
+    </section>
+  </div>
+} @else {
+  <file-drop
+    [error]="dbc.error()"
+    (fileSelected)="onFileSelected($event)"
+    (exampleRequested)="onExampleRequested()"
+  ></file-drop>
+}

@@ -1,0 +1,24 @@
+<ul class="message-list" aria-label="Messages">
+  @for (message of messages(); track message.rawId) {
+    <li>
+      <button
+        type="button"
+        class="message-item"
+        [class.active]="message.rawId === selectedId()"
+        [attr.aria-current]="message.rawId === selectedId() ? 'true' : null"
+        (click)="selected.emit(message.rawId)"
+      >
+        <span class="message-id">{{ message.idHex }}</span>
+        <span class="message-name">{{
+          message.isPseudo ? 'Signals without a message' : message.name
+        }}</span>
+        <span class="message-meta">
+          {{ message.sender || 'no sender' }} &middot; {{ message.signals.length }}
+          {{ message.signals.length === 1 ? 'signal' : 'signals' }}
+        </span>
+      </button>
+    </li>
+  } @empty {
+    <li class="p-2 small text-body-secondary">No messages match.</li>
+  }
+</ul>

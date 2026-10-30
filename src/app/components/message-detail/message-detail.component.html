@@ -1,0 +1,101 @@
+<article>
+  <header class="mb-3">
+    <h2 class="h5 mb-2">
+      {{ message().isPseudo ? 'Signals without a message' : message().name }}
+    </h2>
+
+    @if (message().isPseudo) {
+      <p class="small text-body-secondary mb-0">
+        These signals are defined in the file but are not assigned to any CAN message.
+      </p>
+    } @else {
+      <dl class="facts">
+        <div>
+          <dt>ID</dt>
+          <dd>
+            <code>{{ message().idHex }}</code> ({{ message().id }})
+            @if (message().isExtended) {
+              <span class="badge text-bg-secondary ms-1">Extended</span>
+            }
+          </dd>
+        </div>
+        <div>
+          <dt>Length</dt>
+          <dd>{{ message().dlc }} {{ message().dlc === 1 ? 'byte' : 'bytes' }}</dd>
+        </div>
+        <div>
+          <dt>Sender</dt>
+          <dd>{{ message().sender || '—' }}</dd>
+        </div>
+      </dl>
+    }
+
+    @if (message().comment) {
+      <p class="comment mb-0">{{ message().comment }}</p>
+    }
+  </header>
+
+  @if (!message().isPseudo) {
+    <section class="mb-4">
+      <h3 class="h6">Bit layout</h3>
+      <bit-layout [message]="message()"></bit-layout>
+    </section>
+  }
+
+  <section>
+    <h3 class="h6">Signals ({{ message().signals.length }})</h3>
+
+    <div class="table-responsive">
+      <table class="table table-sm align-middle signals">
+        <thead>
+          <tr>
+            <th scope="col">Signal</th>
+            <th scope="col">Start</th>
+            <th scope="col">Length</th>
+            <th scope="col">Format</th>
+            <th scope="col">Factor</th>
+            <th scope="col">Offset</th>
+            <th scope="col">Range</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Receivers</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (signal of message().signals; track $index) {
+            <tr>
+              <td class="signal-cell">
+                <span class="swatch" aria-hidden="true" [style.--sig-hue]="signalHue($index)"></span>
+                <strong>{{ signal.name }}</strong>
+                @if (signal.multiplexing === 'multiplexor') {
+                  <span class="badge text-bg-secondary ms-1">Multiplexor</span>
+                } @else if (signal.multiplexing === 'multiplexed') {
+                  <span class="badge text-bg-secondary ms-1">Mux = {{ signal.muxValue }}</span>
+                }
+                @if (signal.comment) {
+                  <div class="comment small text-body-secondary">{{ signal.comment }}</div>
+                }
+                @if (signal.values.length > 0) {
+                  <ul class="values">
+                    @for (item of signal.values; track $index) {
+                      <li>
+                        <code>{{ item.value }}</code> {{ item.description }}
+                      </li>
+                    }
+                  </ul>
+                }
+              </td>
+              <td>{{ signal.startBit }}</td>
+              <td>{{ signal.length }}</td>
+              <td class="text-nowrap">{{ format(signal) }}</td>
+              <td>{{ signal.factor }}</td>
+              <td>{{ signal.offset }}</td>
+              <td class="text-nowrap">{{ signal.min }} … {{ signal.max }}</td>
+              <td>{{ signal.unit }}</td>
+              <td>{{ signal.receivers.join(', ') }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</article>

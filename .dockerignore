@@ -1,0 +1,13 @@
+# Dependency directories (let Docker install these inside the container)
+node_modules/
+
+# Git history and IDE settings
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Local build artifacts and logs
+dist/
+.angular/
+*.log

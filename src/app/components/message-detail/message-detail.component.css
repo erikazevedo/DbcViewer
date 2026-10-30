@@ -1,0 +1,54 @@
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 2rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+.facts dt {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--secondary-text-color);
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.comment {
+  white-space: pre-line;
+}
+
+.signals {
+  font-size: 0.8rem;
+}
+
+.signal-cell {
+  min-width: 16rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.2rem;
+  background-color: hsl(var(--sig-hue) 70% 82%);
+}
+
+:host-context([data-theme='dark']) .swatch {
+  background-color: hsl(var(--sig-hue) 45% 30%);
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.75rem;
+}

@@ -1,0 +1,50 @@
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.message-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.6rem;
+  align-items: baseline;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+  background-color: transparent;
+  text-align: left;
+}
+
+.message-item:hover:not(:disabled) {
+  background-color: var(--hover-background-color);
+  color: var(--text-color);
+}
+
+.message-item.active,
+.message-item.active:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.message-id {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.message-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-meta {
+  grid-column: 2;
+  font-size: 0.7rem;
+  color: var(--secondary-text-color);
+}
+
+.message-item.active .message-meta {
+  color: inherit;
+}

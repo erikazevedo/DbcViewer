@@ -1,0 +1,52 @@
+.bit-layout {
+  width: 100%;
+  max-width: 44rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.bit-layout th {
+  padding: 0.2rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--secondary-text-color);
+}
+
+.bit-layout tbody th {
+  width: 5rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.bit-layout td {
+  height: 2rem;
+  padding: 0 0.2rem;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bit-layout td.filled {
+  background-color: hsl(var(--sig-hue) 70% 82%);
+  color: #212529;
+}
+
+:host-context([data-theme='dark']) .bit-layout td.filled {
+  background-color: hsl(var(--sig-hue) 45% 30%);
+  color: #fff;
+}
+
+.bit-layout td.overlap {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0 6px,
+    rgb(0 0 0 / 0.14) 6px 12px
+  );
+}
+
+.bit-layout tr.beyond-dlc td {
+  border-style: dashed;
+}

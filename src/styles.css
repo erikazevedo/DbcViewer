@@ -1,0 +1,74 @@
+:root {
+  --primary-color: #1f5f99;
+  --primary-text-color: #1f5f99;
+  --secondary-color: #d1d3d4;
+  --border-color: #d1d3d4;
+  --hover-background-color: #e9ecef;
+  --background-color: #f2f2f2;
+  --secondary-background-color: #ffffff;
+  --text-color: #212529;
+  --secondary-text-color: #5c636a;
+}
+
+[data-theme='dark'] {
+  --primary-color: #2b6cb0;
+  --primary-text-color: #7db4e6;
+  --secondary-color: #3a3f44;
+  --border-color: #43494f;
+  --hover-background-color: #343a40;
+  --background-color: #1b1d20;
+  --secondary-background-color: #25282c;
+  --text-color: #e0e0e0;
+  --secondary-text-color: #adb5bd;
+}
+
+html,
+body {
+  font-family: Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+  border: none;
+  color: var(--text-color);
+  font-size: 0.8rem;
+  background-color: var(--secondary-color);
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+}
+
+a,
+.app-link {
+  color: var(--primary-text-color);
+}
+
+code {
+  color: var(--primary-text-color);
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

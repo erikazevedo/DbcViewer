@@ -1,0 +1,31 @@
+<table class="bit-layout">
+  <caption class="visually-hidden">
+    Bit layout of {{ message().name }}
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col"><span class="visually-hidden">Byte</span></th>
+      @for (bit of bits; track bit) {
+        <th scope="col">{{ bit }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of rows(); track row.byte) {
+      <tr [class.beyond-dlc]="row.beyondDlc">
+        <th scope="row">Byte {{ row.byte }}</th>
+        @for (cell of row.cells; track $index) {
+          <td
+            [attr.colspan]="cell.colSpan"
+            [class.filled]="cell.hue !== null"
+            [class.overlap]="cell.overlap"
+            [style.--sig-hue]="cell.hue"
+            [title]="cell.title"
+          >
+            {{ cell.label }}
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

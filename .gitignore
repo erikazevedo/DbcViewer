@@ -1,0 +1,15 @@
+# Angular specific
+/dist/
+/out-tsc/
+/tmp/
+/coverage/
+/.angular/
+
+# Node modules and dependency files
+/node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
