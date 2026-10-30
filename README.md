@@ -26,6 +26,10 @@ docker compose run --rm dbc-viewer npm run build
 docker compose run --rm dbc-viewer npm test -- --watch=false
 ```
 
+## Deploying to GitHub Pages
+
+Pushing to `main` runs [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml), which tests, builds with the repository's base path, and publishes the site. Before the first run, set **Settings → Pages → Source** to **GitHub Actions** in the GitHub repository.
+
 ## Project layout
 
 ```
